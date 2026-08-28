@@ -1,1 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620"><defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#102650"/><stop offset="1" stop-color="#071126"/></linearGradient><linearGradient id="c" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4b73ff"/><stop offset="1" stop-color="#16b8d4"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#000" flood-opacity=".28"/></filter></defs><rect width="900" height="620" rx="42" fill="url(#b)"/><g opacity=".12" stroke="#fff"><path d="M0 120H900M0 240H900M0 360H900M0 480H900"/><path d="M150 0V620M300 0V620M450 0V620M600 0V620M750 0V620"/></g><circle cx="720" cy="110" r="130" fill="none" stroke="#4b73ff" stroke-opacity=".22" stroke-width="2"/><circle cx="720" cy="110" r="185" fill="none" stroke="#4b73ff" stroke-opacity=".10" stroke-width="2"/><g filter="url(#s)"><rect x="95" y="130" width="710" height="390" rx="28" fill="#fff"/><rect x="95" y="130" width="710" height="66" rx="28" fill="#f6f8fc"/><circle cx="130" cy="163" r="7" fill="#cbd5e1"/><circle cx="152" cy="163" r="7" fill="#cbd5e1"/><circle cx="174" cy="163" r="7" fill="#cbd5e1"/><rect x="130" y="225" width="300" height="20" rx="10" fill="#0f172a"/><rect x="130" y="262" width="430" height="11" rx="5" fill="#dbe2ec"/><rect x="130" y="283" width="360" height="11" rx="5" fill="#e7ebf2"/><rect x="130" y="330" width="300" height="145" rx="18" fill="#eef3ff"/><rect x="155" y="355" width="180" height="13" rx="6" fill="#315efb"/><rect x="155" y="383" width="120" height="9" rx="4" fill="#a7bdf9"/><rect x="155" y="408" width="225" height="9" rx="4" fill="#a7bdf9"/><rect x="155" y="433" width="170" height="9" rx="4" fill="#a7bdf9"/><rect x="470" y="225" width="300" height="250" rx="18" fill="#f8fafc" stroke="#e5eaf1"/><rect x="500" y="255" width="110" height="110" rx="18" fill="url(#c)"/><path d="M535 302h40v28h-40zM542 294h26v8h-26z" fill="#fff"/><path d="M645 273h90v11h-90zM645 297h70v9h-70zM645 321h100v9H645z" fill="#d7dee9"/><rect x="645" y="360" width="90" height="13" rx="6" fill="#315efb"/><rect x="645" y="388" width="70" height="9" rx="4" fill="#cbd5e1"/><rect x="645" y="410" width="100" height="9" rx="4" fill="#cbd5e1"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" role="img" aria-label="EPR Check dashboard illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17284d"/><stop offset="1" stop-color="#0d1730"/></linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4e86ff"/><stop offset="1" stop-color="#2864f0"/></linearGradient>
+  </defs>
+  <rect width="760" height="520" rx="32" fill="url(#bg)"/>
+  <circle cx="650" cy="85" r="150" fill="#2864f0" opacity=".12"/>
+  <rect x="88" y="72" width="584" height="376" rx="24" fill="#fff" opacity=".97"/>
+  <rect x="118" y="103" width="220" height="16" rx="8" fill="#dbe5f7"/>
+  <rect x="118" y="135" width="330" height="10" rx="5" fill="#edf1f6"/>
+  <rect x="118" y="181" width="258" height="188" rx="18" fill="#f6f8fc" stroke="#e3e9f2"/>
+  <rect x="143" y="210" width="150" height="11" rx="5" fill="#b9c8e7"/>
+  <rect x="143" y="238" width="184" height="9" rx="4" fill="#e1e7f0"/>
+  <rect x="143" y="266" width="184" height="9" rx="4" fill="#e1e7f0"/>
+  <rect x="143" y="302" width="92" height="34" rx="10" fill="url(#blue)"/>
+  <rect x="403" y="181" width="239" height="188" rx="18" fill="#fff" stroke="#e3e9f2"/>
+  <circle cx="470" cy="235" r="36" fill="#eef4ff"/>
+  <path d="M454 235l11 11 22-26" fill="none" stroke="#2864f0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="522" y="210" width="83" height="11" rx="5" fill="#b9c8e7"/>
+  <rect x="522" y="238" width="60" height="9" rx="4" fill="#e1e7f0"/>
+  <rect x="432" y="289" width="177" height="12" rx="6" fill="#edf1f6"/>
+  <rect x="432" y="315" width="132" height="12" rx="6" fill="#edf1f6"/>
+  <rect x="118" y="398" width="524" height="1" fill="#e3e9f2"/>
+  <text x="118" y="424" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#657386">EPR CHECK · TRŽIŠTE PO TRŽIŠTE</text>
+</svg>

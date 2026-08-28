@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 480"><defs><linearGradient id="p" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eef4ff"/><stop offset="1" stop-color="#dfe8f8"/></linearGradient><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#315efb"/><stop offset="1" stop-color="#173ab8"/></linearGradient></defs><rect width="700" height="480" rx="34" fill="url(#p)"/><ellipse cx="355" cy="388" rx="235" ry="34" fill="#b8c6db" opacity=".45"/><path d="M180 190l175-80 190 87-176 83z" fill="#fff" stroke="#c9d4e5" stroke-width="3"/><path d="M180 190v132l189 86V280z" fill="url(#b)"/><path d="M545 197v126l-176 91V280z" fill="#2346bf"/><path d="M180 190l175 86 190-79-190-87z" fill="#4b73ff"/><path d="M288 150l72 35 79-33-72-33z" fill="#dbe5ff"/><path d="M318 238h77v26h-77z" fill="#fff"/><path d="M335 246h43v10h-43z" fill="#315efb"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-label="Ambalaža i EPR provjera">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#edf4ff"/><stop offset="1" stop-color="#f8fafc"/></linearGradient></defs>
+<rect width="900" height="620" rx="36" fill="url(#g)"/>
+<rect x="180" y="150" width="470" height="300" rx="22" fill="#2864f0"/>
+<path d="M180 210l235 125 235-125" fill="none" stroke="#fff" stroke-width="8" opacity=".85"/>
+<path d="M415 335v115" stroke="#fff" stroke-width="8" opacity=".85"/>
+<rect x="335" y="88" width="160" height="80" rx="14" fill="#fff" stroke="#dbe5f7" stroke-width="5"/>
+<path d="M375 126h80" stroke="#2864f0" stroke-width="10" stroke-linecap="round"/>
+<circle cx="710" cy="420" r="72" fill="#fff" stroke="#dbe5f7" stroke-width="5"/>
+<path d="M675 420l24 24 48-58" fill="none" stroke="#16845b" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="450" y="525" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#1645b8">AMBALAŽA → EPR → REPORT</text>
+</svg>
