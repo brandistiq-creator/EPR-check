@@ -1,16 +1,13 @@
-# EPR Check v16
+# EPR Check — v17
 
-Static SEO landing page and MVP lead funnel.
+MVP web stranica za početnu EPR provjeru i narudžbu EPR Reporta.
 
-Flow: Free EPR Check → Report request → Netlify Forms → email notification → manual review/payment → Report delivery.
+## Prodajna logika
+- **EPR Check**: besplatna početna provjera — pokazuje što treba dodatno provjeriti.
+- **EPR Report — 49 € / do 3 tržišta**: strukturirani radni dokument s pregledom tržišta, EPR sustava, registracije, ambalaže/evidencije, izvještavanja, mogućeg predstavnika, službenih izvora i sljedećih koraka.
 
-EPR Report MVP price: 49 € up to 3 markets.
+## Važno
+Report je informativan i nije pravno mišljenje. Radni nacrt (`report-draft.html`) služi kao interna osnova i mora proći ljudsku provjeru prije slanja klijentu.
 
-v16 fixes:
-- restored missing hero-epr.svg asset
-- corrected root-page stylesheet and navigation paths
-- added cache-busting for core assets
-- preserved working EPR Check selection and Netlify Forms flow
-- fixed report-draft data property mismatch
-
-The Report is informational and is not legal advice or a guarantee of regulatory compliance.
+## Netlify Forms
+`index.html` koristi Netlify Forms za prijave. Podaci iz EPR Checka prenose se u skrivena polja obrasca.
