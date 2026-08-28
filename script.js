@@ -21,11 +21,13 @@
     if (state.countries.includes(value)) state.countries = state.countries.filter(x => x !== value);
     else state.countries.push(value);
     toggle(btn, state.countries.includes(value));
+    updateSelectionHints();
   }));
 
   volumeButtons.forEach(btn => btn.addEventListener('click', () => {
     state.volume = btn.dataset.volume || '';
     volumeButtons.forEach(x => toggle(x, x === btn));
+    updateSelectionHints();
   }));
 
   packagingButtons.forEach(btn => btn.addEventListener('click', () => {
@@ -33,7 +35,17 @@
     if (state.packaging.includes(value)) state.packaging = state.packaging.filter(x => x !== value);
     else state.packaging.push(value);
     toggle(btn, state.packaging.includes(value));
+    updateSelectionHints();
   }));
+
+  function updateSelectionHints() {
+    const ch = qs('#countrySelectionHint');
+    const vh = qs('#volumeSelectionHint');
+    const ph = qs('#packagingSelectionHint');
+    if (ch) ch.innerHTML = '<strong>Odabrano:</strong> ' + (state.countries.length ? state.countries.join(', ') : 'ništa');
+    if (vh) vh.innerHTML = '<strong>Odabrano:</strong> ' + (state.volume ? volumeLabel(state.volume) : 'ništa');
+    if (ph) ph.innerHTML = '<strong>Odabrano:</strong> ' + (state.packaging.length ? state.packaging.map(packagingLabel).join(', ') : 'ništa');
+  }
 
   function volumeLabel(v) {
     return ({'50':'1–50','250':'51–250','251':'251–1.000','1001':'1.001+'})[v] || 'nije odabrano';
@@ -90,6 +102,7 @@
   }
 
   if (runButton) runButton.addEventListener('click', renderResult);
+  updateSelectionHints();
 
   // FAQ category filters
   qsa('.faq-filter').forEach(btn => btn.addEventListener('click', () => {
@@ -115,6 +128,7 @@
       volumeButtons.forEach(b => toggle(b, b.dataset.volume === state.volume));
       packagingButtons.forEach(b => toggle(b, state.packaging.includes(b.dataset.packaging)));
       updateReportFields();
+      updateSelectionHints();
     }
     const save = () => sessionStorage.setItem('eprCheckState', JSON.stringify(state));
     [...countryButtons,...volumeButtons,...packagingButtons].forEach(b => b.addEventListener('click', save));
