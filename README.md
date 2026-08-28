@@ -1,13 +1,13 @@
-# EPR Check
+# EPR Check v6
 
-MVP landing page and SEO foundation for EPR Check — EPR za web shop.
+Modern static MVP for EPR Check — EPR za web shop.
 
-## Structure
-- `index.html` — main landing page and EPR Check
-- `epr-*.html` — country SEO pages
-- `styles.css` — visual design
-- `script.js` — EPR Check interactions
-- `robots.txt`
-- `sitemap.xml`
+No build command is required. Deploy the repository root.
 
-Deploy the repository root as a static site. No build command is required.
+Files:
+- index.html
+- epr-*.html
+- styles.css
+- script.js
+- robots.txt
+- sitemap.xml
