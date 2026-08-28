@@ -1,9 +1,9 @@
-# EPR Check v7
+# EPR Check v8
 
 Premium static MVP for EPR Check.
 
-Important:
-- `script.js` is loaded with `defer` from every HTML page.
-- The homepage calculator is functional.
-- No build command is required.
-- Deploy repository root as a static site.
+- Functional EPR Check with meaningful results (no arbitrary score)
+- Categorized/filterable FAQ
+- Local premium SVG illustrations
+- Verified Germany source/provider links
+- No build command required; deploy repository root
