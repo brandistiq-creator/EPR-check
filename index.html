@@ -2,13 +2,15 @@
 <html lang="hr">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EPR za web shop | EPR Check</title><meta name="description" content="Provjerite potencijalne EPR obveze hrvatskog web shopa pri prodaji fizičkih proizvoda kupcima u EU. Besplatni EPR Check i EPR Report.">
+<title>EPR za web shop | EPR Check</title>
+<meta name="description" content="Provjerite potencijalne EPR obveze hrvatskog web shopa pri prodaji fizičkih proizvoda kupcima u EU. Besplatni EPR Check i EPR Report.">
 <link rel="canonical" href="https://epr-check.online/">
 <link rel="stylesheet" href="styles.css">
+<script src="script.js" defer></script>
 </head>
 <body>
 <header><div class="container nav">
-<a class="logo" href="index.html"><span class="logo-mark">✓</span>EPR <span>Check</span></a>
+<a class="logo" href="index.html"><span class="logo-mark">✓</span><span class="logo-word">EPR <span>Check</span></span></a>
 <nav class="navlinks"><a href="index.html#how">Kako radi</a><a href="index.html#report">EPR Report</a><a href="index.html#faq">FAQ</a><a class="navcta" href="index.html#check">Provjeri besplatno</a></nav>
 </div></header>
 
@@ -16,123 +18,100 @@
 <section class="hero">
 <div class="container hero-grid">
 <div>
-<span class="eyebrow">EPR za web shop</span>
-<h1>Prodajete u EU?<br><span>Provjerite EPR.</span></h1>
-<p class="hero-copy">U nekoliko minuta napravite početnu procjenu obveza vezanih uz ambalažu kada iz Hrvatske šaljete fizičke proizvode kupcima u druge države EU.</p>
-<div class="actions"><a class="btn large" href="#check">Provjeri besplatno <span>→</span></a><a class="btn secondary large" href="#how">Kako radi?</a></div>
-<div class="micro">Besplatni pre-check · bez ugovaranja EPR usluge</div>
+<span class="eyebrow">● EPR compliance check</span>
+<h1>Prodajete u EU?<br><em>Provjerite EPR.</em></h1>
+<p class="hero-copy">Brza početna procjena obveza vezanih uz ambalažu za hrvatske web shopove koji šalju fizičke proizvode kupcima u druge države EU.</p>
+<div class="actions"><a class="btn large" href="#check">Pokreni besplatnu provjeru →</a><a class="btn secondary large" href="#how">Kako radi?</a></div>
+<div class="micro">3 pitanja · nekoliko minuta · bez ugovaranja EPR usluge</div>
 </div>
-
 <div class="check-card" id="check">
-<div class="check-head"><div><h2>EPR Check</h2><div class="micro">Početna procjena za vaš webshop</div></div><span class="badge">BESPLATNO</span></div>
+<div class="check-top"><div class="check-head"><h2>EPR Check</h2><p>Početna procjena za vaš webshop</p></div><span class="badge">BESPLATNO</span></div>
 
 <div class="step"><label>1. U koje države šaljete?</label>
 <div class="options">
-<button class="opt" data-country="🇩🇪 Njemačka">🇩🇪 Njemačka</button><button class="opt" data-country="🇦🇹 Austrija">🇦🇹 Austrija</button>
-<button class="opt" data-country="🇸🇮 Slovenija">🇸🇮 Slovenija</button><button class="opt" data-country="🇮🇹 Italija">🇮🇹 Italija</button>
-<button class="opt" data-country="🇭🇷 Hrvatska">🇭🇷 Hrvatska</button><button class="opt" data-country="🇫🇷 Francuska">🇫🇷 Francuska</button>
+<button type="button" class="opt" data-country="🇩🇪 Njemačka">🇩🇪 Njemačka</button><button type="button" class="opt" data-country="🇦🇹 Austrija">🇦🇹 Austrija</button>
+<button type="button" class="opt" data-country="🇸🇮 Slovenija">🇸🇮 Slovenija</button><button type="button" class="opt" data-country="🇮🇹 Italija">🇮🇹 Italija</button>
+<button type="button" class="opt" data-country="🇭🇷 Hrvatska">🇭🇷 Hrvatska</button><button type="button" class="opt" data-country="🇫🇷 Francuska">🇫🇷 Francuska</button>
 </div></div>
 
-<div class="step"><label>2. Koliko približno šaljete? <span class="step-hint">godišnje</span></label>
+<div class="step"><label>2. Koliko približno šaljete? <span class="step-hint">pošiljki godišnje</span></label>
 <div class="options">
-<button class="opt" data-volume="50">1–50</button><button class="opt" data-volume="250">51–250</button>
-<button class="opt" data-volume="251">251–1.000</button><button class="opt" data-volume="1001">1.001+</button>
+<button type="button" class="opt" data-volume="50">1–50</button><button type="button" class="opt" data-volume="250">51–250</button>
+<button type="button" class="opt" data-volume="251">251–1.000</button><button type="button" class="opt" data-volume="1001">1.001+</button>
 </div></div>
 
 <div class="step"><label>3. Koju ambalažu koristite?</label>
 <div class="options">
-<button class="opt" data-packaging="karton">Karton</button><button class="opt" data-packaging="papir">Papir</button>
-<button class="opt" data-packaging="plastika">Plastika</button><button class="opt" data-packaging="staklo">Staklo</button>
-<button class="opt" data-packaging="drvo">Drvo</button><button class="opt" data-packaging="ostalo">Ostalo</button>
+<button type="button" class="opt" data-packaging="karton">Karton</button><button type="button" class="opt" data-packaging="papir">Papir</button>
+<button type="button" class="opt" data-packaging="plastika">Plastika</button><button type="button" class="opt" data-packaging="staklo">Staklo</button>
+<button type="button" class="opt" data-packaging="drvo">Drvo</button><button type="button" class="opt" data-packaging="ostalo">Ostalo</button>
 </div></div>
 
-<button class="btn check-action" id="run-check">Izradi moju procjenu</button>
+<button type="button" class="btn check-action" id="run-check">Izradi moju procjenu →</button>
 <div class="progress"><i id="progressBar"></i></div>
 <div class="result" id="result"></div>
 </div>
 </div>
 </section>
 
-<section id="how">
-<div class="container">
-<div class="section-head center"><h2>Od pitanja do jasnog sljedećeg koraka.</h2><p>Napravili smo EPR Check za male webshopove koji nemaju vremena proučavati 27 nacionalnih sustava.</p></div>
+<section id="how"><div class="container">
+<div class="section-head center"><h2>Od nejasnog pravila do jasnog sljedećeg koraka.</h2><p>EPR Check je napravljen za male webshopove koji nemaju vremena proučavati zasebne sustave za svako EU tržište.</p></div>
 <div class="grid3">
-<div class="card stepcard"><div class="stepnum">01 — PROVJERA</div><div class="icon">⌕</div><h3>Odaberite tržišta</h3><p>Recite nam gdje šaljete proizvode, koliko približno šaljete i kakvu ambalažu koristite.</p></div>
-<div class="card stepcard"><div class="stepnum">02 — PROCJENA</div><div class="icon">✓</div><h3>Dobijte početni rezultat</h3><p>Vidite koja tržišta traže detaljniju provjeru i koje teme treba obraditi.</p></div>
-<div class="card stepcard"><div class="stepnum">03 — REPORT</div><div class="icon">▤</div><h3>Riješite sljedeći korak</h3><p>Za €49 možete naručiti strukturirani EPR Report s pregledom obveza i korisnim poveznicama.</p></div>
-</div>
-</div>
-</section>
+<div class="card"><div class="stepnum">01 — PROVJERA</div><div class="icon">⌕</div><h3>Odaberite tržišta</h3><p>Recite gdje šaljete proizvode, koliko približno šaljete i kakvu ambalažu koristite.</p></div>
+<div class="card"><div class="stepnum">02 — PROCJENA</div><div class="icon">✓</div><h3>Dobijte početni rezultat</h3><p>Vidite koja tržišta traže detaljniju provjeru i koje teme treba obraditi.</p></div>
+<div class="card"><div class="stepnum">03 — REPORT</div><div class="icon">▤</div><h3>Riješite sljedeći korak</h3><p>Za €49 možete naručiti strukturirani EPR Report s pregledom i korisnim poveznicama.</p></div>
+</div></div></section>
 
-<section id="report">
-<div class="container">
-<div class="report">
-<span class="tag">EPR REPORT · €49</span>
-<h2>Ne želite samo znati da postoji problem?</h2>
-<p>Dobijte strukturirani pregled za odabrane države i jasan popis stvari koje trebate provjeriti prije prekogranične prodaje.</p>
+<section id="report"><div class="container"><div class="report">
+<span class="tag">EPR REPORT · €49</span><h2>Ne želite samo znati da postoji problem?</h2>
+<p>Dobijte strukturirani pregled za odabrane države i praktičan popis stvari koje trebate provjeriti prije prekogranične prodaje.</p>
 <div class="report-grid">
 <div class="report-item"><strong>Obveze po državi</strong><span>Registracije, EPR sustavi, predstavnici i reporting.</span></div>
-<div class="report-item"><strong>Sljedeći koraci</strong><span>Praktičan checklist bez nepotrebnog regulatornog žargona.</span></div>
+<div class="report-item"><strong>Sljedeći koraci</strong><span>Checklist napisan jezikom webshopa, ne regulatora.</span></div>
 <div class="report-item"><strong>Relevantni pružatelji</strong><span>Početne opcije koje možete sami kontaktirati.</span></div>
-</div>
-<div class="price">€49</div>
+</div><div class="price">€49</div>
 <div class="actions"><a class="btn large" href="#lead">Zatraži EPR Report →</a></div>
-</div>
-</div>
-</section>
+</div></div></section>
 
-<section>
-<div class="container">
-<div class="section-head"><h2>Neovisni smo o pružatelju usluge.</h2><p>Nakon provjere možemo prikazati nekoliko relevantnih pružatelja za određeno tržište. Ne vežemo vas uz jednu tvrtku.</p></div>
+<section><div class="container"><div class="section-head"><h2>Vi birate tko će odraditi EPR.</h2><p>EPR Check ne veže korisnika uz jednog pružatelja. Nakon provjere možemo prikazati više relevantnih opcija i službene izvore.</p></div>
 <div class="provider-grid">
 <div class="card provider"><div><span class="tag">Njemačka / EU</span><h3>AuthoriseMe</h3><small>EPR i ovlašteno zastupanje</small></div><a href="https://authoriseme.com/" target="_blank" rel="noopener">Posjeti →</a></div>
 <div class="card provider"><div><span class="tag">Njemačka</span><h3>EPR Deutschland</h3><small>EPR usluge za njemačko tržište</small></div><a href="https://www.epr-deutschland.de/" target="_blank" rel="noopener">Posjeti →</a></div>
 <div class="card provider"><div><span class="tag">Austrija / EU</span><h3>Interzero</h3><small>Compliance i recikliranje</small></div><a href="https://www.interzero.com/" target="_blank" rel="noopener">Posjeti →</a></div>
 <div class="card provider"><div><span class="tag">Italija</span><h3>CONAI</h3><small>Službeni talijanski sustav ambalaže</small></div><a href="https://www.conai.org/" target="_blank" rel="noopener">Posjeti →</a></div>
-</div>
-<p class="notice">Poveznice služe kao početna informacija. EPR Check nije povezan s navedenim pružateljima, ne jamči cijene ni kvalitetu usluge i ne predstavlja ih kao certificirane ili preporučene.</p>
-</div>
-</section>
+</div><p class="notice">Poveznice su informativne. EPR Check nije povezan s navedenim organizacijama i ne jamči cijene ni kvalitetu usluge.</p>
+</div></section>
 
-<section>
-<div class="container">
-<div class="section-head center"><h2>Počnite s najvažnijim EU tržištima.</h2><p>Informativni vodiči povezani su izravno s EPR Checkom.</p></div>
-<div class="seo-links">
-<a class="pill" href="epr-njemacka.html">EPR Njemačka →</a><a class="pill" href="epr-austrija.html">EPR Austrija →</a><a class="pill" href="epr-slovenija.html">EPR Slovenija →</a><a class="pill" href="epr-italija.html">EPR Italija →</a><a class="pill" href="epr-hrvatska.html">EPR Hrvatska →</a>
-</div>
-</div>
-</section>
+<section><div class="container"><div class="section-head center"><h2>EPR Check za najvažnija EU tržišta.</h2><p>SEO vodiči vode izravno u besplatnu provjeru.</p></div>
+<div class="seo-links"><a class="pill" href="epr-njemacka.html">EPR Njemačka →</a><a class="pill" href="epr-austrija.html">EPR Austrija →</a><a class="pill" href="epr-slovenija.html">EPR Slovenija →</a><a class="pill" href="epr-italija.html">EPR Italija →</a><a class="pill" href="epr-hrvatska.html">EPR Hrvatska →</a></div>
+</div></section>
 
-<section id="lead">
-<div class="container lead-wrap">
-<div><span class="eyebrow">EPR REPORT</span><div class="section-head"><h2>Želite znati točno što trebate provjeriti?</h2><p>Pošaljite osnovne podatke o svom webshopu. U MVP fazi izvještaj izrađujemo ručno kako bismo ga prilagodili stvarnim potrebama trgovaca.</p></div></div>
-<form class="leadform" id="leadform">
-<input required type="email" placeholder="Vaš email"><input placeholder="Naziv webshopa"><input placeholder="Web stranica webshopa">
-<textarea rows="5" placeholder="U koje države prodajete i što prodajete?"></textarea>
-<button class="btn large" type="submit">Pošalji upit za Report →</button>
-<div class="form-note">U produkciji ćemo povezati obrazac s pravim sustavom za slanje i dodati punu politiku privatnosti.</div>
-<div class="success" id="success">Hvala! Demo obrazac je zaprimio vaš upit. Sljedeći korak je povezivanje stvarnog email sustava.</div>
-</form>
-</div>
-</section>
+<section id="lead"><div class="container lead-wrap">
+<div><span class="eyebrow" style="background:#eef3ff;border-color:#d9e3ff;color:#315efb">EPR REPORT</span><div class="section-head"><h2>Želite detaljniju procjenu?</h2><p>U MVP fazi izvještaj izrađujemo ručno kako bismo ga mogli prilagoditi stvarnim potrebama malog webshopa.</p></div></div>
+<form class="leadform" id="leadform"><input required type="email" placeholder="Vaš email"><input placeholder="Naziv webshopa"><input placeholder="Web stranica webshopa"><textarea rows="5" placeholder="U koje države prodajete i što prodajete?"></textarea><button type="submit" class="btn large">Pošalji upit za Report →</button><div class="form-note">U produkciji ćemo obrazac povezati s pravim email sustavom i dodati punu politiku privatnosti.</div><div class="success" id="success">Hvala! Demo obrazac je zaprimio vaš upit.</div></form>
+</div></section>
 
-<section id="faq">
-<div class="container">
-<div class="section-head center"><h2>Česta pitanja o EPR-u za web shopove.</h2><p>Odgovori su namjerno napisani jednostavnim jezikom. Za konkretan slučaj treba provjeriti pravila relevantne države.</p></div>
+<section id="faq"><div class="container"><div class="section-head center"><h2>Najčešća pitanja o EPR-u.</h2><p>Početne informacije za vlasnike web shopova. Konkretne obveze uvijek treba provjeriti prema relevantnom tržištu.</p></div>
 <div class="faq">
-<details><summary>Što je EPR?</summary><p>EPR je proširena odgovornost proizvođača. U praksi znači da određeni subjekti koji proizvode, uvoze ili stavljaju proizvode i ambalažu na određeno tržište mogu imati obveze registracije, financiranja zbrinjavanja i izvještavanja.</p></details>
-<details><summary>Postoji li jedna EPR registracija za cijelu EU?</summary><p>Ne treba pretpostaviti da jedna registracija automatski rješava nacionalne obveze svih država. Pravila, registri, sustavi i postupci mogu se razlikovati po tržištu.</p></details>
-<details><summary>Moram li imati EPR ako šaljem samo nekoliko paketa?</summary><p>Mali broj pošiljaka sam po sebi nije dovoljan razlog za zaključak da nema obveze. Potrebno je provjeriti državu, proizvod, ambalažu i način prodaje.</p></details>
-<details><summary>Što je PPWR i kakve veze ima s webshopom?</summary><p>PPWR je europska uredba o ambalaži i ambalažnom otpadu. Uspostavlja zajednički okvir, ali webshop i dalje mora provjeriti konkretna pravila i nacionalne provedbene sustave na tržištima na koja prodaje.</p></details>
-<details><summary>Što je ovlašteni predstavnik?</summary><p>U nekim prekograničnim EPR režimima strani prodavatelj mora imenovati lokalnog ovlaštenog predstavnika. To nije univerzalno pravilo za sve države i zato EPR Check provjerava tržišta pojedinačno.</p></details>
-<details><summary>Što moram evidentirati za EPR?</summary><p>Ovisno o sustavu mogu biti važne količine ambalaže i podaci o materijalima. Točne kategorije i način prijave ovise o državi i relevantnom EPR sustavu.</p></details>
-<details><summary>Koliko EPR košta?</summary><p>Trošak nije jedna univerzalna EU cijena. Može uključivati registraciju, EPR/PRO naknade, količinske naknade, administraciju i eventualnog predstavnika.</p></details>
-<details><summary>Može li EPR Check umjesto mene odraditi registraciju?</summary><p>U MVP fazi ne. EPR Check daje procjenu, Report i korisne poveznice prema relevantnim pružateljima. Klijent sam bira kome će povjeriti provedbu.</p></details>
-<details><summary>Je li EPR Check pravni savjet?</summary><p>Ne. EPR Check je informativni alat i pomoć pri početnoj orijentaciji. Složene ili nejasne situacije treba provjeriti sa stručnjakom ili nadležnim sustavom.</p></details>
-<details><summary>Zašto nudite više pružatelja, a ne samo jednog?</summary><p>Želimo ostati neovisni. Korisniku možemo pokazati više relevantnih opcija, uz jasno razdvajanje informativnog sadržaja od komercijalne usluge.</p></details>
-</div>
-</div>
-</section>
+<details><summary>Što je EPR?</summary><p>EPR je proširena odgovornost proizvođača. U određenim situacijama subjekt koji stavlja proizvode ili ambalažu na tržište ima obveze povezane s registracijom, financiranjem zbrinjavanja i izvještavanjem.</p></details>
+<details><summary>Postoji li jedna EPR registracija za cijelu EU?</summary><p>Ne treba pretpostaviti da jedna registracija automatski pokriva sve države. Nacionalni registri, sustavi i procedure mogu se razlikovati.</p></details>
+<details><summary>Moram li imati EPR ako šaljem samo nekoliko paketa?</summary><p>Mali broj pošiljaka sam po sebi nije dovoljan za zaključak da obveza ne postoji. Potrebno je provjeriti pravila države, proizvod, ambalažu i prodajni model.</p></details>
+<details><summary>Što je PPWR?</summary><p>PPWR je EU uredba o ambalaži i ambalažnom otpadu. Uspostavlja zajednički okvir, ali konkretna provedba i nacionalni EPR sustavi i dalje zahtijevaju provjeru po tržištu.</p></details>
+<details><summary>Kako PPWR utječe na web shop?</summary><p>Ako web shop fizički proizvod šalje kupcu u drugoj državi, potrebno je provjeriti kako ta država tretira prekograničnog prodavatelja i ambalažu koju stavlja na svoje tržište.</p></details>
+<details><summary>Što je ovlašteni predstavnik?</summary><p>U nekim državama strani prodavatelj mora imenovati lokalnog ovlaštenog predstavnika za određene EPR obveze. To nije univerzalno pravilo.</p></details>
+<details><summary>Što je EPR/PRO sustav?</summary><p>PRO je organizacija ili sustav kroz koji se u praksi može provoditi proširena odgovornost proizvođača. Nazivi, modeli i zahtjevi razlikuju se po državi i kategoriji otpada.</p></details>
+<details><summary>Koju ambalažu trebam prijavljivati?</summary><p>Ovisi o nacionalnom sustavu. Mogu biti relevantni papir, karton, plastika, staklo, drvo i druge kategorije, uz različite načine obračuna.</p></details>
+<details><summary>Kako vodim evidenciju ambalaže?</summary><p>U pravilu je korisno imati evidenciju količine i vrste materijala koji se stavljaju na pojedino tržište. Točan format i period izvještavanja ovise o sustavu.</p></details>
+<details><summary>Koliko EPR košta?</summary><p>Nema jedinstvene EU cijene. Trošak može uključivati registraciju, EPR/PRO naknade, administraciju, izvještavanje i eventualnog predstavnika.</p></details>
+<details><summary>Postoje li minimalne godišnje naknade?</summary><p>Neki sustavi imaju fiksne ili minimalne naknade. Zato je kod malog volumena posebno važno provjeriti ukupni administrativni trošak po državi.</p></details>
+<details><summary>Je li mali webshop automatski izuzet?</summary><p>Ne treba pretpostaviti automatsko izuzeće samo zbog veličine poslovanja. Relevantna pravila ovise o državi i konkretnom modelu prodaje.</p></details>
+<details><summary>Moram li se registrirati u svakoj državi u koju šaljem?</summary><p>To nije moguće odgovoriti jednom univerzalnom rečenicom. EPR obvezu treba procijeniti za svako tržište prema nacionalnom okviru i vašem konkretnom slučaju.</p></details>
+<details><summary>Može li EPR Check odraditi registraciju umjesto mene?</summary><p>U ovoj MVP fazi ne. EPR Check daje početnu procjenu i Report te omogućuje korisniku da sam odabere pružatelja za formalnu provedbu.</p></details>
+<details><summary>Zašto nudite više pružatelja?</summary><p>Želimo ostati neovisni. Korisniku možemo pokazati više relevantnih opcija i službene izvore, umjesto da ga zaključamo uz jednog komercijalnog partnera.</p></details>
+<details><summary>Je li EPR Check pravni savjet?</summary><p>Ne. Alat služi za informativnu početnu orijentaciju. Za složene slučajeve treba koristiti službene izvore ili kvalificiranog stručnjaka.</p></details>
+<details><summary>Koliko država pokriva EPR Check?</summary><p>MVP počinje s najrelevantnijim tržištima, a arhitektura je pripremljena za širenje na ostale države članice.</p></details>
+<details><summary>Zašto je EPR problem baš za male web shopove?</summary><p>Kod malog volumena robe fiksni administrativni troškovi, registracije i eventualno zastupanje mogu imati nesrazmjerno velik utjecaj na ekonomiku prekogranične prodaje.</p></details>
+</div></div></section>
 </main>
 
 <footer class="footer"><div class="container footer-grid"><div><strong>EPR Check</strong><p>EPR za web shop — jednostavnija provjera EU ambalažnih obveza.</p></div><div><a href="index.html#check">EPR Check</a><br><a href="index.html#report">EPR Report</a></div></div><div class="container notice">Informativni alat. Nije pravno mišljenje niti službeni registar. © 2026 EPR Check.</div></footer>

@@ -1,13 +1,9 @@
-# EPR Check v6
+# EPR Check v7
 
-Modern static MVP for EPR Check — EPR za web shop.
+Premium static MVP for EPR Check.
 
-No build command is required. Deploy the repository root.
-
-Files:
-- index.html
-- epr-*.html
-- styles.css
-- script.js
-- robots.txt
-- sitemap.xml
+Important:
+- `script.js` is loaded with `defer` from every HTML page.
+- The homepage calculator is functional.
+- No build command is required.
+- Deploy repository root as a static site.
