@@ -1,19 +1,122 @@
-document.addEventListener('DOMContentLoaded',()=>{const s={countries:new Set(),volume:null,packaging:new Set()},C=document.querySelectorAll('.opt[data-country]'),V=document.querySelectorAll('.opt[data-volume]'),P=document.querySelectorAll('.opt[data-packaging]'),bar=document.getElementById('progressBar'),res=document.getElementById('result'),run=document.getElementById('run-check');const up=()=>{const n=(s.countries.size?1:0)+(s.volume?1:0)+(s.packaging.size?1:0);if(bar)bar.style.width=`${Math.round(n/3*100)}%`};C.forEach(b=>b.onclick=()=>{b.classList.toggle('active');const v=b.dataset.country;b.classList.contains('active')?s.countries.add(v):s.countries.delete(v);up()});V.forEach(b=>b.onclick=()=>{V.forEach(x=>x.classList.remove('active'));b.classList.add('active');s.volume=b.dataset.volume;up()});P.forEach(b=>b.onclick=()=>{b.classList.toggle('active');const v=b.dataset.packaging;b.classList.contains('active')?s.packaging.add(v):s.packaging.delete(v);up()});const areas=c=>c.includes('Njemačka')?['registracija u LUCID-u','sudjelovanje u relevantnom dualnom sustavu','prijava količina i pitanje ovlaštenog predstavnika']:c.includes('Austrija')?['nacionalna registracija i EPR sustav','ambalažne kategorije i evidencija','obveze stranog prodavatelja / predstavnika']:c.includes('Italija')?['nacionalni sustav i registracija','ambalažne kategorije i prijave','obveze prekogranične B2C prodaje']:c.includes('Slovenija')?['nacionalna registracija / sustav','ambalažne kategorije i količine','obveze stranog prodavatelja']:c.includes('Francuska')?['nacionalni EPR identifikator i registracija','ambalažne kategorije','obveze prema relevantnom sustavu']:['nacionalne obveze za ambalažu','evidencija i izvještavanje','relevantni EPR sustav'];if(run)run.onclick=()=>{if(!s.countries.size)return alert('Odaberite barem jednu državu.');if(!s.volume)return alert('Odaberite približan broj pošiljki.');if(!s.packaging.size)return alert('Odaberite barem jednu vrstu ambalaže.');const list=[...s.countries];res.innerHTML=`<div class="result-title"><h3>Što znači vaša procjena?</h3><span class="result-kicker">Početni pregled</span></div><p class="result-intro">Na temelju vaših odgovora imamo <strong>${list.length} tržišta</strong> za koja treba napraviti detaljniju provjeru. Ovo nije pravna ocjena.</p>${list.map(c=>`<div class="result-box"><strong>${c} — područja za provjeru</strong><ul>${areas(c).map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}<div class="result-box"><strong>Zašto EPR Report?</strong><ul><li>povezuje obveze s konkretnim državama</li><li>navodi službene izvore i registre</li><li>izdvaja što trebate pripremiti</li><li>prikazuje početne opcije pružatelja</li></ul></div><p class="result-note">Report od €49 je strukturirani istraživački pregled, ne pravno mišljenje.</p><div class="actions"><a class="btn" href="#report">Želim detaljan EPR Report →</a></div>`;res.classList.add('show');res.scrollIntoView({behavior:'smooth',block:'nearest'})};document.querySelectorAll('.faq-filter').forEach(b=>b.onclick=()=>{document.querySelectorAll('.faq-filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.filter;document.querySelectorAll('#faqList [data-cat]').forEach(e=>e.style.display=f==='all'||e.dataset.cat===f?'':'none')});const form=document.getElementById('leadform');if(form)form.onsubmit=e=>{e.preventDefault();const x=document.getElementById('success');if(x)x.classList.add('show');form.reset()}});
+(() => {
+  const state = { countries: [], volume: '', packaging: [] };
+  const qs = (sel) => document.querySelector(sel);
+  const qsa = (sel) => Array.from(document.querySelectorAll(sel));
 
-document.addEventListener('DOMContentLoaded',()=>{
-  const filters=document.querySelectorAll('.faq-filter');
-  const items=document.querySelectorAll('#faq .faq details');
-  const category=(q)=>{
-    const t=q.toLowerCase();
-    if(/koliko|košta|troš|naknad|minimal/.test(t)) return 'troskovi';
-    if(/ambala|materijal|evidenc|ppwr/.test(t)) return 'ambalaza';
-    if(/provjer|report|pružatel|pravni|check/.test(t)) return 'report';
-    if(/eu|držav|registracij|predstavnik|prodaj|slanj/.test(t)) return 'eu';
-    return 'osnove';
-  };
-  filters.forEach(f=>f.addEventListener('click',()=>{
-    filters.forEach(x=>x.classList.remove('active'));f.classList.add('active');
-    const key=f.dataset.faqFilter;
-    items.forEach(d=>d.style.display=(key==='all'||category(d.textContent)===key)?'':'none');
+  const countryButtons = qsa('[data-country]');
+  const volumeButtons = qsa('[data-volume]');
+  const packagingButtons = qsa('[data-packaging]');
+  const runButton = qs('#run-check');
+  const result = qs('#result');
+  const progress = qs('#progressBar');
+  const leadForm = qs('#leadform');
+
+  function toggle(button, active) {
+    button.classList.toggle('selected', active);
+    button.setAttribute('aria-pressed', active ? 'true' : 'false');
+  }
+
+  countryButtons.forEach(btn => btn.addEventListener('click', () => {
+    const value = btn.dataset.country;
+    if (state.countries.includes(value)) state.countries = state.countries.filter(x => x !== value);
+    else state.countries.push(value);
+    toggle(btn, state.countries.includes(value));
   }));
-});
+
+  volumeButtons.forEach(btn => btn.addEventListener('click', () => {
+    state.volume = btn.dataset.volume || '';
+    volumeButtons.forEach(x => toggle(x, x === btn));
+  }));
+
+  packagingButtons.forEach(btn => btn.addEventListener('click', () => {
+    const value = btn.dataset.packaging;
+    if (state.packaging.includes(value)) state.packaging = state.packaging.filter(x => x !== value);
+    else state.packaging.push(value);
+    toggle(btn, state.packaging.includes(value));
+  }));
+
+  function volumeLabel(v) {
+    return ({'50':'1–50','250':'51–250','251':'251–1.000','1001':'1.001+'})[v] || 'nije odabrano';
+  }
+  function packagingLabel(v) {
+    return ({karton:'Karton',papir:'Papir',plastika:'Plastika',staklo:'Staklo',drvo:'Drvo',ostalo:'Ostalo'})[v] || v;
+  }
+  function updateReportFields() {
+    const countries = state.countries.join(', ');
+    const packaging = state.packaging.map(packagingLabel).join(', ');
+    const volume = volumeLabel(state.volume);
+    const c = qs('#selectedCountries'); if (c) c.value = countries;
+    const v = qs('#selectedVolume'); if (v) v.value = volume;
+    const p = qs('#selectedPackaging'); if (p) p.value = packaging;
+    const summary = qs('#checkSummary');
+    const summaryText = qs('#checkSummaryText');
+    const scope = qs('#scopeField');
+    if (summary && summaryText && (state.countries.length || state.volume || state.packaging.length)) {
+      summary.style.display = 'block';
+      summaryText.innerHTML = `<strong>Tržišta:</strong> ${countries || '—'}<br><strong>Pošiljke:</strong> ${volume}<br><strong>Ambalaža:</strong> ${packaging || '—'}`;
+    }
+    if (scope) {
+      const existing = scope.dataset.userEdited === 'true';
+      if (!existing) {
+        scope.value = `Tržišta: ${countries || '—'}\nPošiljke godišnje: ${volume}\nAmbalaža: ${packaging || '—'}\n\nDodatne informacije: `;
+      }
+    }
+  }
+
+  if (qs('#scopeField')) qs('#scopeField').addEventListener('input', e => { e.target.dataset.userEdited = 'true'; });
+
+  function renderResult() {
+    const countries = state.countries;
+    if (!countries.length || !state.volume || !state.packaging.length) {
+      result.innerHTML = '<div class="result-warning"><strong>Dovršite provjeru.</strong><p>Odaberite barem jedno tržište, raspon pošiljki i jednu vrstu ambalaže.</p></div>';
+      result.style.display = 'block';
+      return;
+    }
+    const items = countries.map(c => `<li><strong>${c}</strong> — preporučujemo detaljnu provjeru registracije, EPR/PRO sustava, evidencije ambalaže, izvještavanja i mogućeg predstavnika.</li>`).join('');
+    result.innerHTML = `
+      <div class="result-title"><h3>Što trebate provjeriti</h3><span class="score">${countries.length} ${countries.length === 1 ? 'tržište' : 'tržišta'}</span></div>
+      <p style="font-size:13px;color:#526174;line-height:1.6">Na temelju vaših odgovora izdvojili smo tržišta za koja ima smisla napraviti detaljniji pregled.</p>
+      <ul class="result-list">${items}</ul>
+      <div class="callout" style="margin-top:14px;padding:14px;background:#f7f9fc;border:1px solid #e6eaf0;border-radius:14px">
+        <strong>Želite konkretan pregled?</strong><br>
+        <span style="font-size:12px;color:#667085">EPR Report povezuje vaše odabrane države s relevantnim obvezama, službenim izvorima i početnim sljedećim koracima.</span>
+      </div>
+      <div class="actions" style="margin-top:14px"><a class="btn large" href="#lead" id="reportFromCheck">Zatraži EPR Report →</a></div>`;
+    result.style.display = 'block';
+    if (progress) progress.style.width = '100%';
+    updateReportFields();
+    const cta = qs('#reportFromCheck');
+    if (cta) cta.addEventListener('click', () => setTimeout(() => { updateReportFields(); const first = qs('#leadform input[name="name"]'); if (first) first.focus(); }, 150));
+  }
+
+  if (runButton) runButton.addEventListener('click', renderResult);
+
+  // FAQ category filters
+  qsa('.faq-filter').forEach(btn => btn.addEventListener('click', () => {
+    qsa('.faq-filter').forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter || 'all';
+    qsa('#faqList [data-cat]').forEach(el => {
+      el.style.display = filter === 'all' || el.dataset.cat === filter ? '' : 'none';
+    });
+  }));
+
+  // Keep the selected Check data when the user reaches the Report form.
+  if (leadForm) {
+    leadForm.addEventListener('submit', () => updateReportFields());
+  }
+
+  // Restore a previous check when returning to the page with the anchor.
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('eprCheckState') || 'null');
+    if (saved) {
+      Object.assign(state, saved);
+      countryButtons.forEach(b => toggle(b, state.countries.includes(b.dataset.country)));
+      volumeButtons.forEach(b => toggle(b, b.dataset.volume === state.volume));
+      packagingButtons.forEach(b => toggle(b, state.packaging.includes(b.dataset.packaging)));
+      updateReportFields();
+    }
+    const save = () => sessionStorage.setItem('eprCheckState', JSON.stringify(state));
+    [...countryButtons,...volumeButtons,...packagingButtons].forEach(b => b.addEventListener('click', save));
+  } catch(e) {}
+})();

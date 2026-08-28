@@ -53,13 +53,21 @@
 <form class="leadform" id="leadform" name="epr-report" method="POST" data-netlify="true" netlify-honeypot="bot-field">
 <input type="hidden" name="form-name" value="epr-report"><input type="hidden" name="subject" value="EPR Report — novi zahtjev">
 <p style="display:none"><label>Ne ispunjavajte: <input name="bot-field"></label></p>
+<input type="hidden" name="selected-countries" id="selectedCountries">
+<input type="hidden" name="selected-volume" id="selectedVolume">
+<input type="hidden" name="selected-packaging" id="selectedPackaging">
+<div id="checkSummary" class="check-summary" style="display:none">
+  <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#315efb;margin-bottom:6px">Podaci iz vaše EPR provjere</div>
+  <div id="checkSummaryText" style="font-size:13px;line-height:1.6;color:#526174"></div>
+  <div style="font-size:11px;color:#667085;margin-top:7px">Ove podatke smo prenijeli iz besplatnog EPR Checka. Možete ih dopuniti u opisu ispod.</div>
+</div>
 <input required name="email" type="email" placeholder="Email" autocomplete="email">
 <input required name="name" placeholder="Ime i prezime / naziv poslovnog subjekta">
 <input name="webshop" placeholder="Webshop / web stranica">
 <input name="address" placeholder="Adresa za račun">
 <input name="oib" placeholder="OIB / PDV ID (ako postoji)">
 <input name="phone" placeholder="Telefon (opcionalno)">
-<textarea required name="scope" rows="4" placeholder="U koje države prodajete, što prodajete i koju ambalažu koristite?"></textarea>
+<textarea required name="scope" id="scopeField" rows="5" placeholder="Što prodajete, kakvu ambalažu koristite i postoji li nešto posebno što trebamo uzeti u obzir?"></textarea>
 <label style="font-size:11px;color:#526174"><input required type="checkbox" name="order-confirmation" value="confirmed"> Želim naručiti EPR Report po cijeni od 49 € i prihvaćam uvjete usluge.</label>
 <label style="font-size:11px;color:#526174"><input required type="checkbox" name="privacy-consent" value="confirmed"> Pročitao/la sam Politiku privatnosti.</label>
 <button type="submit" class="btn large">Pošalji zahtjev za EPR Report →</button>

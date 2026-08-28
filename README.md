@@ -1,9 +1,9 @@
-# EPR Check v8
+# EPR Check / EPR Report
 
-Premium static MVP for EPR Check.
+MVP landing page and foundation for a Croatian-language EPR pre-check and paid EPR Report service for small web shops.
 
-- Functional EPR Check with meaningful results (no arbitrary score)
-- Categorized/filterable FAQ
-- Local premium SVG illustrations
-- Verified Germany source/provider links
-- No build command required; deploy repository root
+## v11
+- EPR Check selections are transferred into the EPR Report request form.
+- Report form captures invoicing/business data.
+- Draft Report engine remains human-review-first.
+- Netlify Forms-ready lead form.
