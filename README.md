@@ -1,9 +1,9 @@
 # EPR Check / EPR Report
 
-MVP landing page and foundation for a Croatian-language EPR pre-check and paid EPR Report service for small web shops.
+Static SEO landing page and MVP lead funnel.
 
-## v11
-- EPR Check selections are transferred into the EPR Report request form.
-- Report form captures invoicing/business data.
-- Draft Report engine remains human-review-first.
-- Netlify Forms-ready lead form.
+Flow: Free EPR Check → Report request → Netlify Forms → email notification → manual review/payment → Report delivery.
+
+EPR Report MVP price: 49 € up to 3 markets.
+
+The Report is informational and is not legal advice or a guarantee of regulatory compliance.
