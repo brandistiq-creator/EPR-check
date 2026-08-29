@@ -1,8 +1,11 @@
 [build]
   publish = "."
+  functions = "netlify/functions"
 
 [[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Keep admin as a normal page; authorization is enforced server-side by Functions.

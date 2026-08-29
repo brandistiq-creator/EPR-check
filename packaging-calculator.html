@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EPR Packaging Calculator | Besplatna analiza ambalaže</title>
+<meta name="description" content="Učitajte račun ili specifikaciju ambalaže, provjerite prepoznate količine i izračunajte masu ambalaže po materijalu.">
+<style>
+:root{--ink:#101828;--muted:#667085;--line:#e4e7ec;--soft:#f8fafc;--blue:#175cd3;--blue2:#0b1220;--green:#067647;--amber:#b54708;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;background:#f5f7fa;color:var(--ink);font:15px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1120px;margin:auto;padding:22px 18px 70px}.hero{background:linear-gradient(135deg,#0b1220,#172554);color:#fff;border-radius:28px;padding:42px 38px;margin-bottom:18px}
+.kicker{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#a9c4ff;font-weight:800}.hero h1{font-size:44px;line-height:1.03;letter-spacing:-.04em;margin:9px 0 14px;max-width:820px}.hero p{max-width:780px;color:#d0d5dd;margin:0}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.chip{border:1px solid #344054;border-radius:999px;padding:7px 11px;font-size:12px;color:#eef4ff}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;margin:16px 0}.panel h2{margin:0 0 5px;font-size:21px}.muted{color:var(--muted);font-size:13px}
+.drop{display:block;border:2px dashed #b9c8e5;background:#f8fbff;border-radius:18px;padding:30px;text-align:center;cursor:pointer}.drop.drag{border-color:var(--blue);background:#eff8ff}.drop strong{display:block;font-size:17px}.drop span{display:block;color:var(--muted);font-size:13px;margin-top:5px}.drop input{display:none}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}button,.btn{border-radius:11px;padding:11px 15px;font:inherit;font-weight:750;cursor:pointer}.primary{background:var(--blue);color:#fff;border:1px solid var(--blue)}.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}.danger{background:#fff0ef;color:var(--red);border:1px solid #fecdca;padding:7px 10px}
+.msg{padding:13px 15px;border-radius:13px;margin-top:13px;font-size:13px}.ok{background:#ecfdf3;color:#067647;border:1px solid #abefc6}.warn{background:#fffaeb;color:#b54708;border:1px solid #fedf89}.err{background:#fef3f2;color:#b42318;border:1px solid #fecdca}
+.hidden{display:none!important}.table{overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:15px}table{width:100%;min-width:820px;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;vertical-align:middle}th{background:var(--soft);font-size:11px;text-transform:uppercase;color:#475467;letter-spacing:.03em}td input,td select{width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff}.right{text-align:right}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}.metric{padding:16px;border:1px solid var(--line);background:var(--soft);border-radius:15px}.metric small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;font-weight:800}.metric b{display:block;font-size:23px;margin-top:4px}
+.country-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}.country{border:1px solid var(--line);border-radius:12px;padding:11px;cursor:pointer;background:#fff}.country.selected{border-color:#84adff;background:#eff8ff}.country input{margin-right:7px}
+.callout{margin-top:18px;background:#101828;color:#fff;border-radius:17px;padding:20px}.callout p{color:#d0d5dd;margin:5px 0 0}.footer{font-size:11px;color:#98a2b3;margin-top:22px}
+@media(max-width:760px){.hero{padding:30px 23px}.hero h1{font-size:34px}.grid{grid-template-columns:1fr 1fr}.country-grid{grid-template-columns:1fr 1fr}.panel{padding:18px}}
+@media(max-width:430px){.grid,.country-grid{grid-template-columns:1fr}.hero h1{font-size:30px}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="hero">
+<div class="kicker">EPR Check · Besplatni alat</div>
+<h1>Učitajte nabavu ambalaže. Dobijte količine spremne za provjeru.</h1>
+<p>Kalkulator iz dokumenta pokušava izdvojiti proizvode, količine, materijale i mase. Sve možete ručno provjeriti prije nego što se izračunaju ukupne količine u kilogramima.</p>
+<div class="chips"><span class="chip">Računi · Excel · CSV · PDF</span><span class="chip">OCR za slike</span><span class="chip">Izračun po materijalu</span></div>
+</header>
+
+<section class="panel">
+<h2>1 · Učitajte dokument</h2>
+<p class="muted">Najbolji rezultat daju Excel/CSV specifikacije. Za fotografije i skenirane dokumente uključujemo OCR; kod nejasnog teksta uvijek provjerite rezultat.</p>
+<label class="drop" id="drop"><strong>Odaberite datoteku ili je povucite ovdje</strong><span>CSV · TSV · TXT · XLSX · XLS · PDF · JPG · PNG · WEBP</span><input id="file" type="file" accept=".csv,.tsv,.txt,.xlsx,.xls,.pdf,.jpg,.jpeg,.png,.webp"></label>
+<div id="fileStatus" class="muted" style="margin-top:10px"></div><div id="msg" class="hidden"></div>
+</section>
+
+<section class="panel hidden" id="review">
+<h2>2 · Provjerite prepoznate stavke</h2>
+<p class="muted">Kalkulator ne zaključuje obvezu umjesto vas. Ovdje provjeravate što je prepoznato iz dokumenta.</p>
+<div class="table"><table><thead><tr><th>Stavka</th><th>Količina</th><th>Jedinica</th><th>Materijal</th><th>Masa / kom (g)</th><th>Ukupno kg</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+<div class="toolbar"><button class="secondary" id="add">+ Dodaj stavku</button><button class="primary" id="calc">Izračunaj količine →</button></div>
+</section>
+
+<section class="panel hidden" id="results">
+<h2>3 · Rezultat</h2><p class="muted">Procijenjene mase iz potvrđenih stavki.</p>
+<div class="grid" id="metrics"></div>
+<div class="table"><table><thead><tr><th>Materijal</th><th class="right">kg</th><th>Stavki</th></tr></thead><tbody id="totals"></tbody></table></div>
+<div class="toolbar"><button class="secondary" id="csv">Preuzmi CSV</button><button class="secondary" id="copy">Kopiraj sažetak</button></div>
+</section>
+
+<section class="panel hidden" id="next">
+<h2>4 · Gdje se količine koriste?</h2>
+<p class="muted">Odaberite tržište. Ovo ne znači da je obveza potvrđena — samo povezujemo izračunate količine s idućim korakom provjere.</p>
+<div class="country-grid" id="countries">
+<label class="country"><input type="checkbox" value="Njemačka">🇩🇪 Njemačka</label>
+<label class="country"><input type="checkbox" value="Austrija">🇦🇹 Austrija</label>
+<label class="country"><input type="checkbox" value="Slovenija">🇸🇮 Slovenija</label>
+<label class="country"><input type="checkbox" value="Hrvatska">🇭🇷 Hrvatska</label>
+</div>
+<div class="callout"><b>EPR Check vam pokazuje količine.</b><p>EPR Report zatim objašnjava što s tim količinama trebate napraviti na odabranom tržištu — registraciju, sustav, evidenciju, izvještavanje, predstavnika i konkretne sljedeće korake.</p><div class="toolbar"><button class="primary" id="report">Zatraži EPR Report →</button></div></div>
+</section>
+
+<section class="panel">
+<h2>Važno</h2>
+<p class="muted">Kalkulator je pomoćni alat za pripremu evidencije. Rezultat nije pravno mišljenje niti automatska potvrda EPR obveze. Pravila se razlikuju po državi i poslovnom modelu. U Njemačkoj, primjerice, ZSVR traži prijavu količina po materijalnim kategorijama i masi u kilogramima, do tri decimalna mjesta. citeturn0search2turn0search24 Od 12. kolovoza 2026. na razini EU-a općenito se primjenjuje PPWR, pa će se pravila i nacionalne provedbe trebati redovito pratiti. citeturn0search5turn0search8</p>
+</section>
+<div class="footer">EPR Check · Packaging Calculator v2 · Prije službenog izvještavanja provjerite izvorne podatke i pravila relevantnog tržišta.</div>
+</div>
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const mats=['Karton/papir','Plastika','Staklo','Metal','Aluminij','Drvo','Kompozit','Ostalo','Nepoznato'];
+let data=[];
+function n(v){let s=String(v??'').replace(/\\s/g,'').replace(',','.').replace(/[^\\d.-]/g,'');let x=Number(s);return Number.isFinite(x)&&x>=0?x:0}
+function mat(v=''){let x=String(v).toLowerCase();if(/karton|papir|paper|cardboard|papp/.test(x))return'Karton/papir';if(/plast|plastic|folie|folij|poly/.test(x))return'Plastika';if(/stakl|glass/.test(x))return'Staklo';if(/alumin/.test(x))return'Aluminij';if(/metal|metall|steel|željez|iron/.test(x))return'Metal';if(/drvo|wood|holz/.test(x))return'Drvo';if(/kompoz|composite|tetra/.test(x))return'Kompozit';return'Nepoznato'}
+function msg(type,t){let e=$('#msg');e.className='msg '+type;e.textContent=t;e.classList.remove('hidden')}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function render(){let b=$('#rows');b.innerHTML='';data.forEach((r,i)=>{let tr=document.createElement('tr');tr.innerHTML=`<td><input data-i="${i}" data-k="item" value="${esc(r.item)}"></td><td><input data-i="${i}" data-k="qty" type="number" min="0" step="any" value="${r.qty}"></td><td><input data-i="${i}" data-k="unit" value="${esc(r.unit)}"></td><td><select data-i="${i}" data-k="material">${mats.map(x=>`<option ${x===r.material?'selected':''}>${x}</option>`).join('')}</select></td><td><input data-i="${i}" data-k="grams" type="number" min="0" step=".001" value="${r.grams}"></td><td class="right">${(n(r.qty)*n(r.grams)/1000).toFixed(3)}</td><td><button class="danger" data-del="${i}">×</button></td>`;b.appendChild(tr)})}
+function guess(o,i){let a=Object.entries(o).map(([k,v])=>({k:k.toLowerCase(),v:String(v??'')}));let f=t=>a.find(x=>t.some(y=>x.k.includes(y)))?.v||'';return{item:f(['naziv','opis','item','product','artikel','stavka','description'])||`Stavka ${i+1}`,qty:n(f(['kolic','quantity','qty','menge','komada','units']))||1,unit:'kom',material:mat(f(['materijal','material','werkstoff','vrsta'])),grams:n(f(['masa','mass','weight','gewicht','gram','g/kom']))}}
+function delim(t){let l=t.split(/\\r?\\n/).find(x=>x.trim())||'';return [',',';','\\t'].sort((a,b)=>(l.split(b).length)-(l.split(a).length))[0]}
+function parse(t,d){let lines=t.split(/\\r?\\n/).filter(x=>x.trim()),h=(lines[0]||'').split(d).map(x=>x.trim().replace(/^"|"$/g,''));return lines.slice(1).map(x=>{let v=x.split(d).map(y=>y.trim().replace(/^"|"$/g,'')),o={};h.forEach((k,i)=>o[k||'col'+i]=v[i]||'');return o})}
+async function pdfText(file){let s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs';s.type='module';document.head.appendChild(s);throw new Error('Za PDF je u ovoj verziji sigurnije koristiti tekstualni PDF; ako je skeniran, koristite JPG/PNG OCR.')}
+async function ocr(file){let s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';document.head.appendChild(s);await new Promise((res,rej)=>{s.onload=res;s.onerror=rej});let r=await Tesseract.recognize(file,'eng+deu+hrv',{logger:m=>{if(m.status==='recognizing text')$('#fileStatus').textContent=`OCR: ${Math.round((m.progress||0)*100)}%`}});return r.data.text}
+async function handle(file){$('#msg').classList.add('hidden');$('#results').classList.add('hidden');$('#next').classList.add('hidden');data=[];$('#fileStatus').textContent=`Obrađujem ${file.name} …`;try{let ext=file.name.toLowerCase().split('.').pop();if(['xlsx','xls'].includes(ext)){let wb=XLSX.read(await file.arrayBuffer(),{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]],a=XLSX.utils.sheet_to_json(ws,{defval:''});data=a.slice(0,300).map(guess)}else if(['csv','tsv','txt'].includes(ext)){let t=await file.text();data=parse(t,ext==='tsv'?'\\t':delim(t)).slice(0,300).map(guess)}else if(['jpg','jpeg','png','webp'].includes(ext)){let t=await ocr(file);data=parseOCR(t)}else if(ext==='pdf'){throw new Error('Za skenirani PDF preporučujemo pretvaranje stranice u JPG/PNG za OCR. Tekstualni PDF ćemo u sljedećoj integraciji spojiti s OCR-om stranica.')}else throw new Error('Format nije podržan.');if(!data.length)throw new Error('Nisu pronađene prepoznatljive stavke. Dodajte ih ručno.');$('#fileStatus').textContent=`${file.name} · ${data.length} prepoznatih stavki`;$('#review').classList.remove('hidden');render()}catch(e){$('#fileStatus').textContent=`${file.name} · potrebna ručna provjera`;msg('warn',e.message);$('#review').classList.remove('hidden');data=[{item:'',qty:1,unit:'kom',material:'Nepoznato',grams:0}];render()}}
+function parseOCR(t){let lines=t.split(/\\r?\\n/).map(x=>x.trim()).filter(Boolean),out=[];for(let line of lines){let nums=line.match(/\\d+(?:[.,]\\d+)?/g)||[];if(nums.length){let q=n(nums[0]),g=nums.length>1?n(nums[1]):0;out.push({item:line.replace(/\\d+(?:[.,]\\d+)?/g,' ').replace(/\\s+/g,' ').trim(),qty:q||1,unit:'kom',material:mat(line),grams:g})}}return out.slice(0,200)}
+$('#drop').onclick=()=>$('#file').click();$('#file').onchange=e=>e.target.files[0]&&handle(e.target.files[0]);['dragover','dragenter'].forEach(x=>$('#drop').addEventListener(x,e=>{e.preventDefault();$('#drop').classList.add('drag')}));['dragleave','drop'].forEach(x=>$('#drop').addEventListener(x,e=>{e.preventDefault();$('#drop').classList.remove('drag')}));$('#drop').addEventListener('drop',e=>{let f=e.dataTransfer.files[0];if(f)handle(f)});
+$('#rows').addEventListener('input',e=>{let i=+e.target.dataset.i,k=e.target.dataset.k;if(k&&Number.isInteger(i)){data[i][k]=e.target.value;if(k==='qty'||k==='grams')render()}});$('#rows').addEventListener('change',e=>{let i=+e.target.dataset.i,k=e.target.dataset.k;if(k&&Number.isInteger(i))data[i][k]=e.target.value});$('#rows').addEventListener('click',e=>{let i=e.target.dataset.del;if(i!==undefined){data.splice(+i,1);render()}});
+$('#add').onclick=()=>{data.push({item:'',qty:1,unit:'kom',material:'Nepoznato',grams:0});render()};
+$('#calc').onclick=()=>{let clean=data.map(r=>({...r,qty:n(r.qty),grams:n(r.grams)})).filter(r=>r.qty>0&&r.grams>0);if(!clean.length){msg('err','Unesite barem jednu stavku s količinom i masom po jedinici.');return}let m={};clean.forEach(r=>{m[r.material]??={kg:0,count:0};m[r.material].kg+=r.qty*r.grams/1000;m[r.material].count++});let total=Object.values(m).reduce((a,x)=>a+x.kg,0);$('#metrics').innerHTML=[['Ukupno',total.toFixed(3)+' kg'],['Materijala',Object.keys(m).length],['Stavki',clean.length],['Status','Za provjeru']].map(x=>`<div class="metric"><small>${x[0]}</small><b>${x[1]}</b></div>`).join('');$('#totals').innerHTML=Object.entries(m).sort((a,b)=>b[1].kg-a[1].kg).map(([k,v])=>`<tr><td><b>${esc(k)}</b></td><td class="right">${v.kg.toFixed(3)}</td><td>${v.count}</td></tr>`).join('');$('#results').classList.remove('hidden');$('#next').classList.remove('hidden');
+sessionStorage.setItem('eprPackagingSummary',JSON.stringify({
+  generatedAt:new Date().toISOString(),
+  rows:clean,
+  totals:Object.fromEntries(Object.entries(m).map(([k,v])=>[k,Number(v.kg.toFixed(3))])),
+  totalKg:Number(total.toFixed(3))
+}));
+$('#results').scrollIntoView({behavior:'smooth'})};
+$('#csv').onclick=()=>{let c=data.map(r=>({...r,qty:n(r.qty),grams:n(r.grams)})).filter(r=>r.qty&&r.grams),s='Stavka,Kolicina,Jedinica,Materijal,Masa_g,Ukupno_kg\\n'+c.map(r=>[r.item,r.qty,r.unit,r.material,r.grams,(r.qty*r.grams/1000).toFixed(3)].map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([s],{type:'text/csv'}));a.download='epr-packaging-results.csv';a.click()};
+$('#copy').onclick=()=>{let t=[...$('#totals').rows].map(r=>[...r.cells].map(c=>c.textContent.trim()).join('\\t')).join('\\n');navigator.clipboard?.writeText(t);msg('ok','Sažetak je kopiran u međuspremnik.')};
+$('#report').onclick=()=>{
+  let c=$$('#countries input:checked').map(x=>x.value);
+  let saved={};
+  try{saved=JSON.parse(sessionStorage.getItem('eprPackagingSummary')||'{}')}catch(e){}
+  saved.countries=c;
+  saved.rows=data;
+  sessionStorage.setItem('eprPackagingSummary',JSON.stringify(saved));
+  location.href='index.html#lead'
+};
+</script></body></html>

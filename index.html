@@ -7,7 +7,7 @@
 <link rel="canonical" href="https://epr-check.online/">
 <link rel="stylesheet" href="styles.css?v=17">
 <link rel="stylesheet" href="selection-fix.css?v=16">
-<script src="report-engine.js?v=17" defer></script><script src="script.js?v=17" defer></script>
+<script src="report-engine.js?v=17" defer></script><script src="script.js?v=18" defer></script><script src="index-integration.js?v=1" defer></script>
 </head>
 <body>
 <header><div class="container nav">
@@ -16,7 +16,7 @@
 </div></header>
 
 <main>
-<section class="hero"><div class="container hero-grid"><div><span class="eyebrow">● EPR compliance check</span><h1>Prodajete u EU?<br><em>Provjerite EPR.</em></h1><p class="hero-copy">Brza početna procjena obveza vezanih uz ambalažu za hrvatske web shopove koji šalju fizičke proizvode kupcima u druge države EU.</p><div class="actions"><a class="btn large" href="#check">Pokreni besplatnu provjeru →</a><a class="btn secondary large" href="#how">Kako radi?</a></div><div class="micro">3 pitanja · nekoliko minuta · bez ugovaranja EPR usluge</div></div><div class="hero-visual-wrap">
+<section class="hero"><div class="container hero-grid"><div><span class="eyebrow">● EPR compliance check</span><h1>Prodajete u EU?<br><em>Provjerite EPR.</em></h1><p class="hero-copy">Brza početna procjena obveza vezanih uz ambalažu za hrvatske web shopove koji šalju fizičke proizvode kupcima u druge države EU.</p><div class="actions"><a class="btn large" href="#check">Pokreni besplatnu provjeru →</a><a class="btn secondary large" href="#how">Kako radi?</a></div><div class="micro">3 pitanja · nekoliko minuta · bez ugovaranja EPR usluge</div><div style="margin-top:18px"><a class="btn secondary" href="packaging-calculator.html">📦 Izračunajte ambalažu iz dokumenta →</a></div></div><div class="hero-visual-wrap">
 <img class="hero-art" src="hero-epr.svg" alt="Vizualni prikaz EPR Check alata za provjeru ambalažnih obveza web shopa">
 <div class="hero-visual-caption"><span>LIVE PRE-CHECK</span><strong>EU ambalažne obveze, tržište po tržište.</strong></div>
 </div></div></section>
@@ -89,6 +89,11 @@
 <input type="hidden" name="selected-countries" id="selectedCountries">
 <input type="hidden" name="selected-volume" id="selectedVolume">
 <input type="hidden" name="selected-packaging" id="selectedPackaging">
+<input type="hidden" name="packaging-markets" id="packagingMarkets">
+<input type="hidden" name="packaging-total-kg" id="packagingTotalKg">
+<input type="hidden" name="packaging-totals" id="packagingTotals">
+<input type="hidden" name="packaging-calculator-used" id="packagingCalculatorUsed">
+<input type="hidden" name="packaging-calculator-generated-at" id="packagingCalculatorGeneratedAt">
 <div id="checkSummary" class="check-summary" style="display:none">
   <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#315efb;margin-bottom:6px">Podaci iz vaše EPR provjere</div>
   <div id="checkSummaryText" style="font-size:13px;line-height:1.6;color:#526174"></div>
@@ -100,6 +105,7 @@
 <input name="address" placeholder="Adresa za račun">
 <input name="oib" placeholder="OIB / PDV ID (ako postoji)">
 <input name="phone" placeholder="Telefon (opcionalno)">
+<div id="packagingCalculatorSummary" class="check-summary" style="display:none;margin-top:10px"></div>
 <textarea required name="scope" id="scopeField" rows="5" placeholder="Što prodajete, kakvu ambalažu koristite i postoji li nešto posebno što trebamo uzeti u obzir?"></textarea>
 <label style="font-size:11px;color:#526174"><input required type="checkbox" name="order-confirmation" value="confirmed"> Želim naručiti EPR Report po cijeni od 49 € za do 3 tržišta i prihvaćam uvjete usluge.</label>
 <label style="font-size:11px;color:#526174"><input required type="checkbox" name="privacy-consent" value="confirmed"> Pročitao/la sam Politiku privatnosti.</label>
