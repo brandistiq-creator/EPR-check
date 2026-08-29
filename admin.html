@@ -3,143 +3,139 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EPR Admin — Reporti</title>
+<title>EPR Check — Admin</title>
 <style>
-:root{--ink:#101828;--muted:#667085;--line:#e4e7ec;--soft:#f7f9fc;--blue:#175cd3;--green:#067647;--amber:#b54708;--red:#b42318}
-*{box-sizing:border-box}body{margin:0;background:#f5f7fa;color:var(--ink);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
-.wrap{max-width:1200px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-.brand{font-weight:850;font-size:20px}.user{color:var(--muted);font-size:12px}
-button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 13px;font-weight:750;cursor:pointer}.primary{background:var(--blue);border-color:var(--blue);color:#fff}.green{background:#ecfdf3;border-color:#abefc6;color:var(--green)}.danger{background:#fef3f2;border-color:#fecdca;color:var(--red)}
-.grid{display:grid;grid-template-columns:360px 1fr;gap:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.panel h2{font-size:17px;margin:0 0 10px}.muted{color:var(--muted);font-size:12px}
-.list{display:grid;gap:8px;max-height:75vh;overflow:auto}.item{border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer}.item:hover,.item.active{border-color:#84adff;background:#eff8ff}.item b{display:block}.item small{display:block;color:var(--muted);margin-top:3px}
-.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.metric{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px}.metric small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;font-weight:800}.metric b{display:block;margin-top:3px}
-.section{border-top:1px solid var(--line);padding-top:15px;margin-top:15px}.tag{display:inline-block;padding:5px 8px;border-radius:999px;background:#eff8ff;color:#175cd3;font-size:11px;font-weight:800;margin:3px}
-textarea,input,select{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px;font:inherit}textarea{min-height:110px}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.empty{padding:30px;text-align:center;color:var(--muted)}
-.hidden{display:none!important}.notice{padding:12px 14px;border-radius:12px;background:#fffaeb;border:1px solid #fedf89;color:#7a4e00;margin-bottom:12px;font-size:12px}
-#login{max-width:480px;margin:12vh auto}.loginbox{background:#fff;border:1px solid var(--line);border-radius:20px;padding:25px}.loginbox h1{margin-top:0}.row{margin:10px 0}.row label{display:block;font-size:12px;font-weight:750;margin-bottom:5px}
-@media(max-width:850px){.grid{grid-template-columns:1fr}.meta{grid-template-columns:1fr 1fr}}
+:root{--ink:#101828;--muted:#667085;--blue:#1463ff;--soft:#f5f8ff;--line:#e4e7ec;--green:#067647;--orange:#b54708;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;background:#f6f8fb;color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 18px 70px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
+.brand{font-weight:800;font-size:22px}.brand span{color:var(--blue)}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 28px rgba(16,24,40,.05);margin-bottom:18px}
+h1{font-size:32px;margin:0 0 6px}h2{font-size:22px;margin:0 0 14px}p{color:#475467}
+input,button{font:inherit}input{width:100%;padding:12px 14px;border:1px solid #cfd5df;border-radius:11px}
+button{border:0;border-radius:11px;padding:11px 15px;font-weight:750;cursor:pointer}
+.primary{background:var(--blue);color:#fff}.secondary{background:#eef4ff;color:#1452c7}.ghost{background:#f2f4f7;color:#344054}
+.error{color:var(--red);margin-top:10px}.hidden{display:none!important}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:12px;text-transform:uppercase;color:var(--muted)}
+.badge{display:inline-flex;padding:5px 9px;border-radius:999px;background:#ecfdf3;color:var(--green);font-size:12px;font-weight:800}
+small{color:var(--muted)}.empty{text-align:center;padding:35px;color:var(--muted)}
+.report-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+iframe{width:100%;height:78vh;border:1px solid var(--line);border-radius:14px;background:#fff}
+.stat{display:flex;gap:14px;flex-wrap:wrap}.stat div{background:var(--soft);border:1px solid #dbe6ff;border-radius:14px;padding:12px 16px}.stat b{font-size:22px;display:block}
 </style>
 </head>
 <body>
-<div id="login" class="hidden">
-<div class="loginbox">
-<h1>EPR Admin</h1>
-<p class="muted">Prijavite se administratorskim Netlify Identity računom.</p>
-<div class="row"><label>Email</label><input id="email" type="email"></div>
-<div class="row"><label>Lozinka</label><input id="password" type="password"></div>
-<div class="actions"><button class="primary" id="loginBtn">Prijava</button></div>
-<div id="loginMsg" class="muted" style="margin-top:10px"></div>
-</div></div>
+<div class="wrap">
+<header><div class="brand">✓ <span>EPR Check</span> Admin</div><button id="logout" class="ghost hidden">Odjava</button></header>
 
-<div id="app" class="wrap hidden">
-<div class="top"><div><div class="brand">EPR Admin · Reporti</div><div class="user" id="user"></div></div><button id="logout">Odjava</button></div>
-<div id="notice" class="notice hidden"></div>
-<div class="grid">
-<section class="panel">
-<h2>Prijave za Report</h2>
-<p class="muted">Verified Netlify Forms submissions. Kliknite prijavu za pregled i izradu nacrta.</p>
-<div id="list" class="list"><div class="empty">Učitavanje…</div></div>
+<section id="loginCard" class="card">
+<h1>Administracija EPR Reporta</h1>
+<p>Ovaj dio je namijenjen samo vlasniku stranice. Prijave dolaze iz Netlify Forma <b>epr-report</b>.</p>
+<label>Admin lozinka</label>
+<input id="password" type="password" autocomplete="current-password" placeholder="Unesite admin lozinku">
+<div style="margin-top:12px"><button id="login" class="primary">Otvori prijave</button></div>
+<div id="loginError" class="error"></div>
 </section>
 
-<section class="panel">
-<div id="detail" class="empty">Odaberite prijavu.</div>
-</section>
+<section id="dashboard" class="hidden">
+<div class="card">
+<div class="toolbar" style="justify-content:space-between">
+<div><h1>Zahtjevi za EPR Report</h1><p style="margin:0">Odaberite prijavu i izradite pregled.</p></div>
+<div class="toolbar"><button id="refresh" class="secondary">↻ Osvježi</button></div>
+</div>
+<div class="stat" style="margin-top:18px"><div><small>Zaprimljeno</small><b id="count">0</b></div><div><small>Forma</small><b style="font-size:18px">epr-report</b></div></div>
+</div>
+
+<div class="card">
+<div class="table-wrap">
+<table><thead><tr><th>Datum</th><th>Klijent</th><th>Email</th><th>Sažetak</th><th></th></tr></thead>
+<tbody id="rows"></tbody></table>
+<div id="empty" class="empty hidden">Nema zaprimljenih prijava.</div>
 </div>
 </div>
 
-<script type="module">
-import { getUser, login, logout } from 'https://esm.sh/@netlify/identity@2.0.1';
+<div id="reportCard" class="card hidden">
+<div class="toolbar" style="justify-content:space-between">
+<div><h2>Pregled Reporta</h2><small id="selected"></small></div>
+<button id="closeReport" class="ghost">Zatvori</button>
+</div>
+<div class="report-actions">
+<button id="print" class="primary">🖨 Ispis / Spremi kao PDF</button>
+<button id="open" class="secondary">Otvori u novoj kartici</button>
+</div>
+<div style="margin-top:16px"><iframe id="reportFrame" title="EPR Report"></iframe></div>
+</div>
+</section>
+</div>
 
+<script>
 const $=s=>document.querySelector(s);
-let submissions=[], selected=null;
+let adminPassword=sessionStorage.getItem("epr_admin_password")||"";
+let currentReportUrl="";
 
-async function api(path, options={}) {
-  const r=await fetch(path,{...options,headers:{'Content-Type':'application/json',...(options.headers||{})}});
+async function api(url){
+  const r=await fetch(url,{headers:{"x-admin-password":adminPassword}});
   const text=await r.text();
-  let data; try{data=JSON.parse(text)}catch{data={message:text}};
-  if(!r.ok) throw new Error(data.message||`HTTP ${r.status}`);
+  let data; try{data=JSON.parse(text)}catch{throw new Error(text||"Greška")}
+  if(!r.ok) throw new Error(data.error||"Greška");
   return data;
 }
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function fmtDate(x){try{return new Date(x).toLocaleString('hr-HR')}catch{return x||''}}
-function dataOf(s){return s?.data||{}}
-
-async function boot(){
-  try{
-    const u=await getUser();
-    if(!u){$('#login').classList.remove('hidden');return;}
-    $('#app').classList.remove('hidden');$('#user').textContent=`Prijavljen: ${u.email}`;
-    await load();
-  }catch(e){$('#login').classList.remove('hidden');$('#loginMsg').textContent=e.message}
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function pick(data, keys){
+  const entries=Object.entries(data||{});
+  for(const k of keys){
+    const hit=entries.find(([name])=>name.toLowerCase().replace(/[^a-z0-9čćđšž]/g,"").includes(k));
+    if(hit && hit[1]) return Array.isArray(hit[1])?hit[1].join(", "):hit[1];
+  }
+  return "";
+}
+function clientName(s){
+  const d=s.data||{};
+  return pick(d,["imeiprezime","nazivposlovnogsubjekta","company","name","klijent"]) || s.name || s.title || "Bez naziva";
+}
+function email(s){return pick(s.data,["email","e-mail"])||s.email||""}
+function summary(s){
+  const d=s.data||{};
+  const countries=Object.entries(d).filter(([k,v])=>/njema|austr|sloven|ital|franc/i.test(String(k)+" "+String(v))).map(([,v])=>v).filter(Boolean).join(", ");
+  return countries || s.summary || "Podaci iz prijave";
+}
+function renderRows(items){
+  $("#count").textContent=items.length;
+  $("#rows").innerHTML=items.map(s=>`
+  <tr><td><small>${esc(new Date(s.created_at).toLocaleString("hr-HR"))}</small></td>
+  <td><b>${esc(clientName(s))}</b></td><td>${esc(email(s))}</td>
+  <td><span class="badge">${esc(summary(s))}</span></td>
+  <td><button class="secondary" data-id="${esc(s.id)}">Izradi Report</button></td></tr>`).join("");
+  $("#empty").classList.toggle("hidden",items.length!==0);
+  document.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>openReport(b.dataset.id,items.find(x=>x.id===b.dataset.id)));
 }
 async function load(){
   try{
-    const r=await api('/.netlify/functions/admin-submissions');
-    submissions=r.submissions||[];
-    renderList();
-    if(submissions[0]) select(submissions[0].id);
-  }catch(e){$('#notice').textContent=e.message;$('#notice').classList.remove('hidden');$('#list').innerHTML='<div class="empty">Nije moguće učitati prijave.</div>'}
+    const data=await api("/.netlify/functions/epr-admin?action=list");
+    renderRows(data.submissions||[]);
+  }catch(e){alert(e.message)}
 }
-function renderList(){
-  $('#list').innerHTML=submissions.length?submissions.map(s=>{
-    const d=dataOf(s), markets=d.packaging_markets||d.countries||'';
-    return `<div class="item ${selected?.id===s.id?'active':''}" data-id="${esc(s.id)}">
-      <b>${esc(s.name||d.name||s.email||'Bez imena')}</b>
-      <small>${esc(s.company||d.company||'Bez tvrtke')} · ${esc(fmtDate(s.created_at))}</small>
-      <small>${esc(markets||'Tržište nije navedeno')} · ${esc(d.packaging_total_kg||'—')} kg</small>
-    </div>`
-  }).join(''):'<div class="empty">Nema prijava.</div>';
+async function openReport(id,s){
+  currentReportUrl="/.netlify/functions/epr-admin?action=report&id="+encodeURIComponent(id);
+  $("#reportFrame").src=currentReportUrl;
+  $("#selected").textContent=clientName(s)+" · "+email(s);
+  $("#reportCard").classList.remove("hidden");
+  $("#reportCard").scrollIntoView({behavior:"smooth"});
 }
-$('#list').addEventListener('click',e=>{const x=e.target.closest('.item');if(x)select(x.dataset.id)});
-function select(id){
-  selected=submissions.find(x=>x.id===id);renderList();renderDetail();
-}
-function renderDetail(){
-  if(!selected){$('#detail').innerHTML='<div class="empty">Odaberite prijavu.</div>';return}
-  const d=dataOf(selected), markets=(d.packaging_markets||'').split(',').map(x=>x.trim()).filter(Boolean);
-  const status=d.epr_report_status||'Novi zahtjev';
-  $('#detail').innerHTML=`
-    <h2>${esc(selected.name||'Prijava')}</h2>
-    <div class="meta">
-      <div class="metric"><small>Status</small><b>${esc(status)}</b></div>
-      <div class="metric"><small>Email</small><b>${esc(selected.email||d.email||'—')}</b></div>
-      <div class="metric"><small>Tvrtka</small><b>${esc(selected.company||d.company||'—')}</b></div>
-    </div>
-    <div class="section"><b>Tržišta</b><div>${markets.map(x=>`<span class="tag">${esc(x)}</span>`).join('')||'—'}</div></div>
-    <div class="section"><b>Ambalaža iz kalkulatora</b><p>${esc(d.packaging_totals||'Nema podataka')}</p><p class="muted">Ukupno: ${esc(d.packaging_total_kg||'—')} kg</p></div>
-    <div class="section"><b>Napomena / opseg klijenta</b><p>${esc(d.scope||d.message||selected.body||'—')}</p></div>
-    <div class="section"><label><b>Interna bilješka</b></label><textarea id="note">${esc(d.admin_note||'')}</textarea></div>
-    <div class="actions">
-      <button class="primary" id="draft">Generiraj Draft Report</button>
-      <button class="green" id="approve">Odobri i generiraj finalni Report</button>
-      <button class="secondary" id="saveNote">Spremi bilješku</button>
-    </div>
-    <div id="result" style="margin-top:12px"></div>`;
-  $('#draft').onclick=()=>generate(false);
-  $('#approve').onclick=()=>generate(true);
-  $('#saveNote').onclick=()=>saveNote();
-}
-async function saveNote(){
-  try{
-    const r=await api('/.netlify/functions/admin-report',{method:'POST',body:JSON.stringify({action:'note',submissionId:selected.id,note:$('#note').value})});
-    selected.data={...(selected.data||{}),admin_note:$('#note').value,epr_report_status:r.status};
-    renderDetail();$('#result').textContent='Bilješka spremljena.';
-  }catch(e){$('#result').textContent=e.message}
-}
-async function generate(approve){
-  const r=$('#result');r.textContent='Generiram…';
-  try{
-    const out=await api('/.netlify/functions/admin-report',{method:'POST',body:JSON.stringify({action:approve?'approve':'draft',submissionId:selected.id})});
-    r.innerHTML=`<div class="notice" style="margin-top:0">${esc(out.message)}</div>
-      <div class="actions"><a href="${esc(out.previewUrl)}" target="_blank"><button class="primary">Otvori Report</button></a>
-      <a href="${esc(out.downloadUrl)}" download><button class="secondary">Preuzmi HTML</button></a></div>`;
-    await load();select(selected.id);
-  }catch(e){r.textContent=e.message}
-}
-$('#loginBtn').onclick=async()=>{try{await login($('#email').value,$('#password').value);location.reload()}catch(e){$('#loginMsg').textContent=e.message}};
-$('#logout').onclick=async()=>{await logout();location.reload()};
-boot();
+$("#login").onclick=async()=>{
+  adminPassword=$("#password").value.trim();
+  if(!adminPassword)return;
+  try{await api("/.netlify/functions/epr-admin?action=list");sessionStorage.setItem("epr_admin_password",adminPassword);$("#loginCard").classList.add("hidden");$("#dashboard").classList.remove("hidden");$("#logout").classList.remove("hidden");load();}
+  catch(e){$("#loginError").textContent="Neispravna lozinka ili admin funkcija još nije postavljena."}
+};
+$("#password").addEventListener("keydown",e=>{if(e.key==="Enter")$("#login").click()});
+$("#refresh").onclick=load;
+$("#closeReport").onclick=()=>$("#reportCard").classList.add("hidden");
+$("#open").onclick=()=>window.open(currentReportUrl,"_blank");
+$("#print").onclick=()=>{const f=$("#reportFrame");f.contentWindow.focus();f.contentWindow.print()};
+$("#logout").onclick=()=>{sessionStorage.removeItem("epr_admin_password");location.reload()};
+if(adminPassword){$("#password").value=adminPassword;$("#login").click()}
 </script>
 </body>
 </html>
